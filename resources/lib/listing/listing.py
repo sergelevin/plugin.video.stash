@@ -84,6 +84,8 @@ class Listing(ABC):
         title = kwargs['title'] if 'title' in kwargs else scene['title']
         screenshot = kwargs['screenshot'] if 'screenshot' in kwargs else scene['paths']['screenshot']
         file = scene['files'][0]
+        if not title and file is not None:
+            title = file['basename']
         # / 10 because rating is 1 to 100 and Kodi uses 1 to 10
         rating = round(scene['rating100'] / 10 if 'rating100' in scene and scene['rating100'] is not None else 0)
         duration = int(file['duration'])
